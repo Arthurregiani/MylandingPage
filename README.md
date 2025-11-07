@@ -38,7 +38,3 @@ CONTACT_EMAIL_TO=arthurregiani@gmail.com # opcional, usa SMTP_USER por padrão
 3. Informar as variáveis de ambiente acima em *Project Settings › Environment Variables*.
 4. Deploy. A Vercel detecta automaticamente `npm run build` e `npm start`.
 
-## Próximos passos sugeridos
-- Adicionar novos cards em `app/components/Projects.tsx` com links reais.
-- Criar a rota `/project/coffeehub` usando mesma linguagem visual.
-- Conectar serviços de observabilidade (Sentry/Logtail) para monitorar o formulário de contato.
