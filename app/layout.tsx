@@ -15,9 +15,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Arthur José Regiani | Backend & Solution Architecture",
+  title: "Arthur José Regiani",
   description:
     "Landing page pessoal com foco em backend, arquitetura de soluções, cloud design e experiências digitais animadas.",
+  icons: {
+    icon: "/solarized-icon.svg",
+    shortcut: "/solarized-icon.svg",
+    apple: "/solarized-icon.svg",
+  },
 };
 
 export default function RootLayout({

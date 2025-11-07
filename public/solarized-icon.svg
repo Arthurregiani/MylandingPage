@@ -1,0 +1,21 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="core" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#fdf6e3" />
+      <stop offset="40%" stop-color="#b58900" />
+      <stop offset="100%" stop-color="#cb4b16" />
+    </radialGradient>
+    <linearGradient id="ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#268bd2" />
+      <stop offset="50%" stop-color="#2aa198" />
+      <stop offset="100%" stop-color="#6c71c4" />
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="64" fill="#001a21" />
+  <circle cx="128" cy="128" r="70" fill="url(#core)" opacity="0.95" />
+  <circle cx="128" cy="128" r="110" fill="none" stroke="url(#ring)" stroke-width="14" stroke-linecap="round" stroke-dasharray="28 36" opacity="0.9" />
+  <circle cx="128" cy="128" r="120" fill="none" stroke="#073642" stroke-width="4" opacity="0.4" />
+  <path d="M70 70 L110 90" stroke="#2aa198" stroke-width="6" stroke-linecap="round" opacity="0.7" />
+  <path d="M180 90 L210 70" stroke="#268bd2" stroke-width="6" stroke-linecap="round" opacity="0.7" />
+  <path d="M86 190 L120 174" stroke="#6c71c4" stroke-width="6" stroke-linecap="round" opacity="0.6" />
+</svg>

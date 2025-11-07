@@ -19,20 +19,76 @@ import {
 import { solarizedAccents } from "@/lib/palette";
 
 const stackItems = [
-  { name: "Java", icon: SiOpenjdk },
-  { name: "TypeScript", icon: SiTypescript },
-  { name: "JavaScript", icon: SiJavascript },
-  { name: "React", icon: SiReact },
-  { name: "React Native", icon: SiReact },
-  { name: "Node.js (Express)", icon: SiNodedotjs },
-  { name: "TypeORM", icon: SiTypeorm },
-  { name: "PostgreSQL", icon: SiPostgresql },
-  { name: "Django / DRF", icon: SiDjango },
-  { name: "Docker", icon: SiDocker },
-  { name: "Git", icon: SiGit },
-  { name: "Linux", icon: SiLinux },
-  { name: "Kotlin / Android", icon: SiKotlin },
-  { name: "Firebase", icon: SiFirebase },
+  {
+    name: "Java",
+    icon: SiOpenjdk,
+    detail: "Microservices, Spring, integrações assíncronas",
+  },
+  {
+    name: "TypeScript",
+    icon: SiTypescript,
+    detail: "Tipagem rigorosa em APIs e front-ends modernos",
+  },
+  {
+    name: "JavaScript",
+    icon: SiJavascript,
+    detail: "Prototipação ágil e dinamismo em interfaces",
+  },
+  {
+    name: "React",
+    icon: SiReact,
+    detail: "Componentes declarativos e UX responsiva",
+  },
+  {
+    name: "React Native",
+    icon: SiReact,
+    detail: "Apps mobile alinhados ao backend",
+  },
+  {
+    name: "Node.js (Express)",
+    icon: SiNodedotjs,
+    detail: "APIs leves e pipelines de integração",
+  },
+  {
+    name: "TypeORM",
+    icon: SiTypeorm,
+    detail: "Modelagem consistente em bancos relacionais",
+  },
+  {
+    name: "PostgreSQL",
+    icon: SiPostgresql,
+    detail: "Consultas performáticas e dados confiáveis",
+  },
+  {
+    name: "Django / DRF",
+    icon: SiDjango,
+    detail: "Backends sólidos e admin pronto para produção",
+  },
+  {
+    name: "Docker",
+    icon: SiDocker,
+    detail: "Ambientes reprodutíveis e pipelines CI/CD",
+  },
+  {
+    name: "Git",
+    icon: SiGit,
+    detail: "Fluxos colaborativos e release controlada",
+  },
+  {
+    name: "Linux",
+    icon: SiLinux,
+    detail: "Infraestrutura, scripts e troubleshooting",
+  },
+  {
+    name: "Kotlin / Android",
+    icon: SiKotlin,
+    detail: "Integrações nativas com serviços backend",
+  },
+  {
+    name: "Firebase",
+    icon: SiFirebase,
+    detail: "MVPs com auth, push e storage gerenciados",
+  },
 ];
 
 export default function TechStack() {
@@ -72,7 +128,7 @@ export default function TechStack() {
               </div>
               <div>
                 <p className="text-lg font-semibold text-[#eee8d5]">{item.name}</p>
-                <p className="text-sm text-[#93a1a1]">Sempre buscando a melhor prática</p>
+                <p className="text-sm text-[#93a1a1]">{item.detail}</p>
               </div>
             </motion.div>
           );
