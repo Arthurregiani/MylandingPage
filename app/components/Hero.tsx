@@ -148,7 +148,7 @@ export default function Hero() {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <span className="w-fit rounded-full border border-[#d33682]/30 bg-[#d33682]/10 px-4 py-1 text-xs uppercase tracking-[0.35em] text-[#cb4b16]">
-          Arthur José Regiani · Arquiteto em formação
+          Arthur José Regiani · Backend Developer
         </span>
 
         <div className="space-y-6">
