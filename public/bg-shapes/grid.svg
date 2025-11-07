@@ -1,0 +1,38 @@
+<svg width="720" height="720" viewBox="0 0 720 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradGrid" x1="0" y1="0" x2="720" y2="720">
+      <stop offset="0" stop-color="#2AA198" stop-opacity="0.3" />
+      <stop offset="1" stop-color="#268BD2" stop-opacity="0.2" />
+    </linearGradient>
+  </defs>
+  <rect width="720" height="720" fill="none" />
+  <g stroke="url(#gradGrid)" stroke-width="0.5">
+    <path d="M0 0 L0 720" />
+    <path d="M60 0 L60 720" />
+    <path d="M120 0 L120 720" />
+    <path d="M180 0 L180 720" />
+    <path d="M240 0 L240 720" />
+    <path d="M300 0 L300 720" />
+    <path d="M360 0 L360 720" />
+    <path d="M420 0 L420 720" />
+    <path d="M480 0 L480 720" />
+    <path d="M540 0 L540 720" />
+    <path d="M600 0 L600 720" />
+    <path d="M660 0 L660 720" />
+    <path d="M720 0 L720 720" />
+
+    <path d="M0 0 L720 0" />
+    <path d="M0 60 L720 60" />
+    <path d="M0 120 L720 120" />
+    <path d="M0 180 L720 180" />
+    <path d="M0 240 L720 240" />
+    <path d="M0 300 L720 300" />
+    <path d="M0 360 L720 360" />
+    <path d="M0 420 L720 420" />
+    <path d="M0 480 L720 480" />
+    <path d="M0 540 L720 540" />
+    <path d="M0 600 L720 600" />
+    <path d="M0 660 L720 660" />
+    <path d="M0 720 L720 720" />
+  </g>
+</svg>

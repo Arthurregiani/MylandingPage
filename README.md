@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Arthur José Regiani — Solarized Landing
 
-## Getting Started
+Experiência pessoal construída em Next.js (App Router) com tema Solarized Dark, animações Framer Motion, smooth scroll com Lenis e backend de contato via Nodemailer. A página foi desenhada para ser facilmente estendida com novos projetos e futuros estudos de arquitetura de soluções.
 
-First, run the development server:
+## Stack & Principais recursos
+- **Next.js 16** com App Router e fontes Geist.
+- **Tailwind CSS v4** + utilitários customizados para glassmorphism e parallax.
+- **Framer Motion** para transições de entrada, modal de projetos e microinterações.
+- **Lenis** garantindo scroll suave global.
+- **shadcn/ui** (Button, Input, Textarea) adaptados ao tema Solarized.
+- **API `/api/contact`** com validação `zod` e envio via `nodemailer`.
 
+## Como rodar localmente
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install          # instala dependências
+npm run dev          # inicia em http://localhost:3000
+npm run lint         # opcional, executa ESLint
+npm run build        # gera build otimizada
+npm start            # serve a build gerada
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Variáveis de ambiente
+Copie `.env.example` para `.env.local` e preencha:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+SMTP_HOST=smtp.seuprovedor.com
+SMTP_PORT=465
+SMTP_USER=contato@dominio.com
+SMTP_PASS=senha-super-secreta
+CONTACT_EMAIL_TO=arthurregiani@gmail.com # opcional, usa SMTP_USER por padrão
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> O endpoint `/api/contact` falhará em produção se qualquer uma das credenciais SMTP estiver ausente.
 
-## Learn More
+## Deploy na Vercel
+1. Faça login em [vercel.com](https://vercel.com/).
+2. Importar o repositório e selecionar o framework **Next.js** (config padrão).
+3. Informar as variáveis de ambiente acima em *Project Settings › Environment Variables*.
+4. Deploy. A Vercel detecta automaticamente `npm run build` e `npm start`.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Próximos passos sugeridos
+- Adicionar novos cards em `app/components/Projects.tsx` com links reais.
+- Criar a rota `/project/coffeehub` usando mesma linguagem visual.
+- Conectar serviços de observabilidade (Sentry/Logtail) para monitorar o formulário de contato.
