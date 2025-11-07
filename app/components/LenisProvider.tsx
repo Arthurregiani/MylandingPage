@@ -12,7 +12,6 @@ export default function LenisProvider({
     const lenis = new Lenis({
       duration: 1.2,
       smoothWheel: true,
-      smoothTouch: false,
       lerp: 0.12,
     });
 
