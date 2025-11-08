@@ -28,7 +28,7 @@ SMTP_HOST=smtp.seuprovedor.com
 SMTP_PORT=465
 SMTP_USER=contato@dominio.com
 SMTP_PASS=senha-super-secreta
-CONTACT_EMAIL_TO=arthurregiani@gmail.com # opcional, usa SMTP_USER por padrão
+CONTACT_EMAIL_TO= # opcional, usa SMTP_USER por padrão
 ```
 
 > O endpoint `/api/contact` falhará em produção se qualquer uma das credenciais SMTP estiver ausente.
