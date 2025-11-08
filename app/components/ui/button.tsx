@@ -12,6 +12,8 @@ const buttonVariants = cva(
       variant: {
         primary:
           "bg-[linear-gradient(120deg,#2aa198_0%,#268bd2_30%,#6c71c4_60%,#cb4b16_90%)] text-[#002b36] hover:brightness-110",
+        vivid:
+          "bg-[linear-gradient(120deg,#0ea5e9_0%,#22c55e_50%,#a3e635_100%)] text-[#002b36] hover:brightness-110",
         outline:
           "border-[#b58900]/50 bg-transparent text-[#b58900] hover:border-[#cb4b16] hover:bg-[#cb4b16]/10",
         ghost:

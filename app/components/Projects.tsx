@@ -18,11 +18,11 @@ const projects: Project[] = [
   {
     title: "CoffeeHub",
     summary:
-      "App mobile e API completa para rastreabilidade e gestão de cafés especiais.",
+      "App mobile e API completa para rastreabilidade e gestão para cafeicultura.",
     description:
-      "CoffeeHub nasceu para conectar o produtor ao consumidor com transparência. Combinei React Native 0.80 + React 19 no front e Django 5 + DRF no backend, com PostgreSQL e Docker para provisionar ambientes reproduzíveis. O resultado é um ecossistema que acompanha desde a colheita até o analytics em tempo real.",
+      "CoffeeHub nasceu para conectar o produtor ao consumidor com transparência. Combinei React Native 0.80 + React 19 no front e Django 5 + DRF no backend, com PostgreSQL e Docker para provisionar ambientes reproduzíveis. O resultado é um ecossistema que acompanha todo processo de cultivo dos cafés.",
     githubUrl: undefined,
-    route: "/project/coffeehub",
+    route: "Rota dedicada em breve",
     stack: ["React Native", "React 19", "Django 5", "DRF", "PostgreSQL", "Docker"],
   },
 ];
@@ -154,7 +154,24 @@ export default function Projects() {
               </div>
               {activeProject.route && (
                 <p className="mt-6 text-sm text-[#93a1a1]">
-                  Rota dedicada em breve: <span className="text-[#2aa198]">{activeProject.route}</span>
+                  {activeProject.route.startsWith("http") ? (
+                    <>
+                      Repositório: {" "}
+                      <a
+                        href={activeProject.route}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[#2aa198] underline underline-offset-4 hover:text-[#2aa198]/80"
+                      >
+                        {activeProject.route}
+                      </a>
+                    </>
+                  ) : (
+                    <>
+                      {" "}
+                      <span className="text-[#2aa198]">{activeProject.route}</span>
+                    </>
+                  )}
                 </p>
               )}
             </motion.div>

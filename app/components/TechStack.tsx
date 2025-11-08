@@ -96,7 +96,7 @@ export default function TechStack() {
     <section className="mx-auto mt-24 w-full max-w-6xl px-4 sm:px-10 lg:px-16">
       <div className="mb-8">
         <p className="text-sm uppercase tracking-[0.4em] text-[#93a1a1]">Stack</p>
-        <h2 className="mt-2 text-3xl font-semibold text-[#eee8d5] sm:text-4xl">Ferramentas que me mantêm em órbita</h2>
+        <h2 className="mt-2 text-3xl font-semibold text-[#eee8d5] sm:text-4xl">  Ferramentas que sustentam meus sistemas</h2>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

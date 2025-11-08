@@ -80,14 +80,13 @@ export default function Contact() {
             Contato
           </p>
           <h2 className="text-3xl font-semibold text-[#eee8d5]">
-            Vamos conversar sobre arquitetura, backend ou cafés especiais.
+            Vamos conversar sobre desenvolvimento, backend ou cafés especiais.
           </h2>
           <p>
-            O formulário dispara um e-mail direto para minha caixa principal via
-            `/api/contact`. Pode mandar dúvidas, oportunidades ou só um oi.
+            O formulário dispara um e-mail direto para minha caixa principal. Pode mandar dúvidas, oportunidades ou só um oi.
           </p>
           <div className="text-xs uppercase tracking-[0.4em] text-[#2aa198]">
-            Ideias → Código → Café → Deploy → Repetir
+            Café Fresco → Ideia Bruta → Produto Vivo
           </div>
         </div>
 
@@ -134,7 +133,7 @@ export default function Contact() {
           </div>
 
           <div className="flex flex-col gap-3">
-            <Button type="submit" disabled={status === "loading"}>
+            <Button type="submit" disabled={status === "loading"} variant="vivid">
               {status === "loading" ? "Enviando..." : "Enviar mensagem"}
             </Button>
             {feedback && (

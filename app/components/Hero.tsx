@@ -12,17 +12,17 @@ const MotionImage = motion(Image);
 const heroStats = [
   {
     label: "Foco atual",
-    value: "Arquitetura de Soluções & Cloud AWS",
+    value: "APIs & Cloud AWS",
     accent: solarizedAccents[4],
   },
   {
-    label: "Stack aplicada",
-    value: "Java · Node · React Native",
+    label: "Especialidade",
+    value: "APIs · Serviços · Integrações",
     accent: solarizedAccents[3],
   },
   {
     label: "Mindset",
-    value: "Construir · Observar · Evoluir",
+    value: "Clareza · Ação · Aprendizado",
     accent: solarizedAccents[6],
   },
 ];
@@ -172,7 +172,7 @@ export default function Hero() {
         </div>
 
         <div className="flex flex-wrap gap-4">
-          <Button asChild size="lg">
+          <Button asChild size="lg" variant="vivid">
             <Link href="#projetos">Ver Projetos</Link>
           </Button>
           <Button
