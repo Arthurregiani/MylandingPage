@@ -9,6 +9,7 @@ Experiência pessoal construída em Next.js (App Router) com tema Solarized Dark
 - **Lenis** garantindo scroll suave global.
 - **shadcn/ui** (Button, Input, Textarea) adaptados ao tema Solarized.
 - **API `/api/contact`** com validação `zod` e envio via `nodemailer`.
+- **Toggle Solarized** com troca em tempo real entre Dark e Light diretamente no layout.
 
 ## Como rodar localmente
 ```bash
@@ -38,3 +39,12 @@ CONTACT_EMAIL_TO=arthurregiani@gmail.com # opcional, usa SMTP_USER por padrão
 3. Informar as variáveis de ambiente acima em *Project Settings › Environment Variables*.
 4. Deploy. A Vercel detecta automaticamente `npm run build` e `npm start`.
 
+## Deploy via Docker
+1. Gere um arquivo de variáveis para produção (`cp .env.example .env.production`) e ajuste os valores SMTP.
+2. Monte a imagem: `docker build -t my-landing-page .`
+3. Suba o container expondo a porta 3000 (ajuste conforme necessário):
+   ```bash
+   docker run -d --name landing-page -p 3000:3000 --env-file .env.production my-landing-page
+   ```
+4. Atualizações: `docker stop landing-page && docker rm landing-page && docker build ...` antes de rodar novamente.
+5. Para logs em produção: `docker logs -f landing-page`.

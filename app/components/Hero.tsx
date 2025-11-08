@@ -5,29 +5,26 @@ import { useMemo, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/app/components/ui/button";
-import { solarizedAccents } from "@/lib/palette";
+import { useTheme } from "@/app/components/ThemeProvider";
+import { useAccentPalette } from "@/app/hooks/useAccentPalette";
+import { useCopy } from "@/app/hooks/useCopy";
 
 const MotionImage = motion(Image);
 
-const heroStats = [
-  {
-    label: "Foco atual",
-    value: "APIs & Cloud AWS",
-    accent: solarizedAccents[4],
-  },
-  {
-    label: "Especialidade",
-    value: "APIs · Serviços · Integrações",
-    accent: solarizedAccents[3],
-  },
-  {
-    label: "Mindset",
-    value: "Clareza · Ação · Aprendizado",
-    accent: solarizedAccents[6],
-  },
-];
-
 export default function Hero() {
+  const { theme } = useTheme();
+  const copy = useCopy();
+  const heroCopy = copy.hero;
+  const isLight = theme === "solarized-light";
+  const accents = useAccentPalette();
+  const heroStats = useMemo(
+    () =>
+      heroCopy.stats.map((stat) => ({
+        ...stat,
+        accent: accents[stat.accentIndex % accents.length],
+      })),
+    [accents, heroCopy.stats],
+  );
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -42,9 +39,9 @@ export default function Hero() {
       Array.from({ length: 11 }, (_, index) => ({
         left: `${(index / 10) * 100}%`,
         delay: index * 0.35,
-        accent: solarizedAccents[index % solarizedAccents.length],
+        accent: accents[index % accents.length],
       })),
-    [],
+    [accents],
   );
   const codeSnippets = ["async()", "<cloud/>", "lambda{}", "IaC.apply", "trace()", "devops()", "matrix++", "docker run", "kubectl", "git push"];
   const trailLines = [
@@ -54,10 +51,22 @@ export default function Hero() {
     { top: "30%", left: "72%", duration: 10, delay: 2 },
   ];
 
+  const shapeSources = isLight
+    ? {
+        orb1: "/bg-shapes/orb-1-light.svg",
+        orb2: "/bg-shapes/orb-2-light.svg",
+        grid: "/bg-shapes/grid-light.svg",
+      }
+    : {
+        orb1: "/bg-shapes/orb-1.svg",
+        orb2: "/bg-shapes/orb-2.svg",
+        grid: "/bg-shapes/grid.svg",
+      };
+
   const shapes = [
     {
       id: "orb-1",
-      src: "/bg-shapes/orb-1.svg",
+      src: shapeSources.orb1,
       className:
         "top-[-60px] right-[10%] w-72 opacity-70 blur-3xl sm:top-[-80px]",
       style: shapeOne,
@@ -66,7 +75,7 @@ export default function Hero() {
     },
     {
       id: "orb-2",
-      src: "/bg-shapes/orb-2.svg",
+      src: shapeSources.orb2,
       className:
         "left-[5%] bottom-[10%] w-64 opacity-70 blur-2xl sm:w-80",
       style: shapeTwo,
@@ -75,7 +84,7 @@ export default function Hero() {
     },
     {
       id: "grid",
-      src: "/bg-shapes/grid.svg",
+      src: shapeSources.grid,
       className:
         "left-1/2 top-1/2 w-[580px] -translate-x-1/2 -translate-y-1/2 opacity-70",
       style: shapeThree,
@@ -87,11 +96,15 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate flex min-h-screen flex-col justify-center overflow-hidden px-4 pt-28 text-[#eee8d5] sm:px-10 lg:px-16"
+      className="relative isolate flex min-h-screen flex-col justify-center overflow-hidden px-4 pt-28 text-[var(--color-heading)] sm:px-10 lg:px-16"
     >
       <motion.div
-        className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(38,139,210,0.25),_transparent_55%)]"
-        style={{ y: parallaxOffset }}
+        className="absolute inset-0 -z-10"
+        style={{
+          y: parallaxOffset,
+          background:
+            "radial-gradient(circle at top, var(--hero-radial-color) 0%, transparent var(--hero-radial-fade))",
+        }}
       />
       <div className="pointer-events-none absolute inset-0 -z-20 overflow-hidden">
         {codeColumns.map((column) => (
@@ -119,8 +132,13 @@ export default function Hero() {
         {trailLines.map((trail, index) => (
           <motion.span
             key={`trail-${index}`}
-            className="absolute block h-px w-44 bg-gradient-to-r from-transparent via-[#d33682]/60 to-[#b58900]/80 blur-[0.5px]"
-            style={{ top: trail.top, left: trail.left }}
+            className="absolute block h-px w-44 blur-[0.5px]"
+            style={{
+              top: trail.top,
+              left: trail.left,
+              background:
+                "linear-gradient(90deg, transparent, var(--accent-trail-mid), var(--accent-trail-end))",
+            }}
             initial={{ x: "-10%" }}
             animate={{ x: "110%" }}
             transition={{ repeat: Infinity, repeatType: "loop", duration: trail.duration, delay: trail.delay, ease: "linear" }}
@@ -132,7 +150,7 @@ export default function Hero() {
         <MotionImage
           alt="decorative shape"
           src={shape.src}
-          key={shape.id}
+          key={`${shape.id}-${theme}`}
           className={`pointer-events-none absolute -z-10 ${shape.className}`}
           style={{ y: shape.style }}
           width={shape.width}
@@ -147,33 +165,40 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <span className="w-fit rounded-full border border-[#d33682]/30 bg-[#d33682]/10 px-4 py-1 text-xs uppercase tracking-[0.35em] text-[#cb4b16]">
-          Arthur José Regiani · Backend Developer
+        <span
+          className="w-fit rounded-full border px-5 py-1.5 text-sm uppercase tracking-[0.45em] sm:text-base"
+          style={{
+            borderColor: "var(--hero-badge-border)",
+            backgroundColor: "var(--hero-badge-bg)",
+            color: "var(--hero-badge-text)",
+          }}
+        >
+          {heroCopy.badge}
         </span>
 
         <div className="space-y-6">
           <motion.h1
-            className="text-4xl font-semibold leading-tight text-[#eee8d5] sm:text-5xl lg:text-6xl"
+            className="text-4xl font-semibold leading-tight text-[var(--color-heading)] sm:text-5xl lg:text-6xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
           >
-            Backend Developer | Learning Solution Architecture & Cloud Design
+            {heroCopy.title}
           </motion.h1>
 
           <motion.p
-              className="text-lg text-[#93a1a1] sm:text-xl"
+              className="text-lg text-[var(--color-muted)] sm:text-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35, duration: 0.8, ease: "easeOut" }}
           >
-            Construo produtos que fazem sentido. Se não fizer, eu refaço até fazer.
+            {heroCopy.subtitle}
           </motion.p>
         </div>
 
         <div className="flex flex-wrap gap-4">
-          <Button asChild size="lg" variant="vivid">
-            <Link href="#projetos">Ver Projetos</Link>
+          <Button asChild size="lg" variant="cta">
+            <Link href="#projetos">{heroCopy.ctaPrimary}</Link>
           </Button>
           <Button
             variant="outline"
@@ -186,7 +211,7 @@ export default function Hero() {
               target="_blank"
               rel="noreferrer"
             >
-              LinkedIn
+              {heroCopy.ctaSecondary}
             </Link>
           </Button>
         </div>
@@ -200,9 +225,9 @@ export default function Hero() {
           {heroStats.map((stat) => (
             <div
               key={stat.label}
-              className="rounded-3xl border border-white/5 bg-[#073642]/40 p-5 backdrop-blur-3xl"
+              className="rounded-3xl border border-[color:var(--color-border-soft)] bg-[color:rgb(var(--color-surface-rgb))/0.4] p-5 backdrop-blur-3xl"
             >
-              <span className="text-xs uppercase tracking-[0.3em] text-[#93a1a1]">
+              <span className="text-xs uppercase tracking-[0.3em] text-[var(--color-muted)]">
                 {stat.label}
               </span>
               <p

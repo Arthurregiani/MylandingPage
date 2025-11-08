@@ -2,17 +2,98 @@
 @import "../styles/animations.css";
 
 :root {
-  --solarized-base: #002b36;
-  --solarized-surface: #07364290;
-  --solarized-text: #839496;
-  --solarized-heading: #eee8d5;
-  --solarized-accent-a: #2aa198;
-  --solarized-accent-b: #268bd2;
+  --color-background: #002b36;
+  --color-background-rgb: 0 43 54;
+  --color-surface: #073642;
+  --color-surface-rgb: 7 54 66;
+  --color-text: #839496;
+  --color-text-rgb: 131 148 150;
+  --color-muted: #93a1a1;
+  --color-muted-rgb: 147 161 161;
+  --color-heading: #eee8d5;
+  --color-heading-rgb: 238 232 213;
+  --color-border-soft: rgba(255, 255, 255, 0.05);
+  --color-border-strong: rgba(255, 255, 255, 0.1);
+  --color-scrollbar-track: #00161c;
+  --button-secondary-bg: rgba(11, 49, 60, 0.8);
+  --button-secondary-hover: #0f3d4b;
+  --color-overlay-95: rgba(0, 43, 54, 0.95);
+  --color-body-strong: #b4c2c2;
+  --accent-cyan: #2aa198;
+  --accent-blue: #268bd2;
+  --accent-magenta: #d33682;
+  --accent-gold: #b58900;
+  --accent-orange: #cb4b16;
+  --accent-danger: #dc322f;
+  --accent-trail-mid: rgba(211, 54, 130, 0.6);
+  --accent-trail-end: rgba(181, 137, 0, 0.8);
+  --link-color: #2aa198;
+  --link-hover: #268bd2;
+  --hero-radial-color: rgba(38, 139, 210, 0.25);
+  --hero-radial-fade: 55%;
+  --hero-badge-border: rgba(211, 54, 130, 0.3);
+  --hero-badge-bg: rgba(211, 54, 130, 0.1);
+  --hero-badge-text: #cb4b16;
+  --scrim-color: rgba(0, 0, 0, 0.7);
+  --button-vivid-start: #0ea5e9;
+  --button-vivid-mid: #22c55e;
+  --button-vivid-end: #a3e635;
+  --button-vivid-text: #04262d;
+  --button-cta-start: #2aa198;
+  --button-cta-mid: #268bd2;
+  --button-cta-end: #6c71c4;
+  --button-cta-text: #002b36;
+  --page-radial-color: rgba(42, 161, 152, 0.12);
+  --page-radial-fade: 60%;
 }
 
-@theme inline {
-  --color-background: var(--solarized-base);
-  --color-foreground: var(--solarized-text);
+:root[data-theme="solarized-light"] {
+  --color-background: #fdf6e3;
+  --color-background-rgb: 253 246 227;
+  --color-surface: #f5efdc;
+  --color-surface-rgb: 245 239 220;
+  --color-text: #657b83;
+  --color-text-rgb: 101 123 131;
+  --color-muted: #839496;
+  --color-muted-rgb: 131 148 150;
+  --color-heading: #002b36;
+  --color-heading-rgb: 0 43 54;
+  --color-border-soft: rgba(0, 0, 0, 0.08);
+  --color-border-strong: rgba(0, 0, 0, 0.15);
+  --color-scrollbar-track: #d3cbb7;
+  --button-secondary-bg: rgba(255, 255, 255, 0.8);
+  --button-secondary-hover: #fdf6e3;
+  --color-overlay-95: rgba(253, 246, 227, 0.95);
+  --color-body-strong: #4e5a62;
+  --accent-cyan: #2aa198;
+  --accent-blue: #268bd2;
+  --accent-magenta: #d33682;
+  --accent-gold: #b58900;
+  --accent-orange: #cb4b16;
+  --accent-trail-mid: rgba(211, 54, 130, 0.4);
+  --accent-trail-end: rgba(181, 137, 0, 0.6);
+  --link-color: #268bd2;
+  --link-hover: #d33682;
+  --hero-radial-color: #ffbf0011;
+  --hero-radial-fade: 72%;
+  --hero-badge-border: rgba(181, 136, 0, 0.092);
+  --hero-badge-bg: rgba(255, 255, 255, 0.65);
+  --hero-badge-text: #b58900;
+  --scrim-color: rgba(0, 0, 0, 0.55);
+  --button-vivid-start: #2aa198;
+  --button-vivid-mid: #268bd2;
+  --button-vivid-end: #6c71c4;
+  --button-vivid-text: #002b36;
+  --accent-danger: #dc322f;
+  --page-radial-color: rgba(38, 139, 210, 0.18);
+  --page-radial-fade: 70%;
+  --button-cta-start: #fdc836;
+  --button-cta-mid: #ffe992;
+  --button-cta-end: #ffe992;
+  --button-cta-text: #7c2d12;
+}
+
+:root {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -24,10 +105,11 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: var(--solarized-base);
-  color: var(--solarized-text);
+  background-color: var(--color-background);
+  color: var(--color-text);
   font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont;
   overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 ::-webkit-scrollbar {
@@ -35,7 +117,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #00161c;
+  background: var(--color-scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {

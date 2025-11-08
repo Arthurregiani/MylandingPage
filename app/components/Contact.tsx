@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Textarea } from "@/app/components/ui/textarea";
+import { useCopy } from "@/app/hooks/useCopy";
 
 interface FormState {
   name: string;
@@ -22,6 +23,7 @@ export default function Contact() {
   });
   const [status, setStatus] = useState<Status>("idle");
   const [feedback, setFeedback] = useState<string>("");
+  const { contact } = useCopy();
 
   const handleChange = (
     field: keyof FormState,
@@ -37,7 +39,7 @@ export default function Contact() {
 
     if (!form.name || !form.email || !form.message) {
       setStatus("error");
-      setFeedback("Preencha todos os campos antes de enviar.");
+      setFeedback(contact.feedback.missingFields);
       return;
     }
 
@@ -55,91 +57,89 @@ export default function Contact() {
       }
 
       setStatus("success");
-      setFeedback("Mensagem enviada! Retornarei em breve.");
+      setFeedback(contact.feedback.success);
       setForm({ name: "", email: "", message: "" });
     } catch (error) {
       console.error(error);
       setStatus("error");
-      setFeedback(
-        "Não foi possível enviar agora. Tente novamente em instantes.",
-      );
+      setFeedback(contact.feedback.error);
     }
   };
 
   return (
     <section className="mx-auto mt-24 w-full max-w-5xl px-4 sm:px-10 lg:px-16">
       <motion.div
-        className="grid gap-8 rounded-[32px] border border-white/5 bg-[#073642]/45 p-8 text-[#839496] shadow-2xl backdrop-blur-3xl md:grid-cols-[1fr_1.2fr]"
+        className="grid gap-8 rounded-[32px] border border-[color:var(--color-border-soft)] bg-[color:rgb(var(--color-surface-rgb))/0.45] p-8 text-[var(--color-text)] shadow-2xl backdrop-blur-3xl md:grid-cols-[1fr_1.2fr]"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="space-y-4">
-          <p className="text-sm uppercase tracking-[0.4em] text-[#93a1a1]">
-            Contato
+          <p className="text-sm uppercase tracking-[0.4em] text-[var(--color-muted)]">
+            {contact.eyebrow}
           </p>
-          <h2 className="text-3xl font-semibold text-[#eee8d5]">
-            Vamos conversar sobre desenvolvimento, backend ou cafés especiais.
+          <h2 className="text-3xl font-semibold text-[var(--color-heading)]">
+            {contact.title}
           </h2>
-          <p>
-            O formulário dispara um e-mail direto para minha caixa principal. Pode mandar dúvidas, oportunidades ou só um oi.
-          </p>
-          <div className="text-xs uppercase tracking-[0.4em] text-[#2aa198]">
-            Café Fresco → Ideia Bruta → Produto Vivo
+          <p>{contact.description}</p>
+          <div className="text-xs uppercase tracking-[0.4em] text-[var(--accent-cyan)]">
+            {contact.mantra}
           </div>
         </div>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="space-y-2">
-            <label className="text-sm text-[#93a1a1]" htmlFor="name">
-              Nome
+            <label className="text-sm text-[var(--color-muted)]" htmlFor="name">
+              {contact.labels.name}
             </label>
             <Input
               id="name"
               value={form.name}
               onChange={(event) => handleChange("name", event.target.value)}
-              placeholder="Como posso te chamar?"
+              placeholder={contact.placeholders.name}
               required
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm text-[#93a1a1]" htmlFor="email">
-              Email
+            <label className="text-sm text-[var(--color-muted)]" htmlFor="email">
+              {contact.labels.email}
             </label>
             <Input
               id="email"
               type="email"
               value={form.email}
               onChange={(event) => handleChange("email", event.target.value)}
-              placeholder="nome@empresa.com"
+              placeholder={contact.placeholders.email}
               required
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm text-[#93a1a1]" htmlFor="message">
-              Mensagem
+            <label className="text-sm text-[var(--color-muted)]" htmlFor="message">
+              {contact.labels.message}
             </label>
             <Textarea
               id="message"
               rows={5}
               value={form.message}
               onChange={(event) => handleChange("message", event.target.value)}
-              placeholder="Conte a ideia, contexto e onde posso ajudar."
+              placeholder={contact.placeholders.message}
               required
             />
           </div>
 
           <div className="flex flex-col gap-3">
-            <Button type="submit" disabled={status === "loading"} variant="vivid">
-              {status === "loading" ? "Enviando..." : "Enviar mensagem"}
+            <Button type="submit" disabled={status === "loading"} variant="cta">
+              {status === "loading" ? contact.loading : contact.button}
             </Button>
             {feedback && (
               <p
                 className={`text-sm ${
-                  status === "success" ? "text-[#2aa198]" : "text-[#dc322f]"
+                  status === "success"
+                    ? "text-[var(--accent-cyan)]"
+                    : "text-[var(--accent-danger)]"
                 }`}
               >
                 {feedback}

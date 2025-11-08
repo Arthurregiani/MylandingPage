@@ -1,26 +1,25 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { solarizedAccents } from "@/lib/palette";
-
-const mantra = ["Ideias", "Código", "Café", "Deploy", "Repetir"];
+import { useAccentPalette } from "@/app/hooks/useAccentPalette";
+import { useCopy } from "@/app/hooks/useCopy";
 
 export default function About() {
+  const accents = useAccentPalette();
+  const { about } = useCopy();
   return (
     <section className="relative mx-auto mt-20 w-full max-w-5xl px-4 sm:px-10 lg:px-16">
       <motion.div
-        className="space-y-5 rounded-[32px] border border-white/5 bg-[#073642]/40 p-8 text-[#839496] shadow-2xl backdrop-blur-3xl"
+        className="space-y-5 rounded-[32px] border border-[color:var(--color-border-soft)] bg-[color:rgb(var(--color-surface-rgb))/0.4] p-8 text-[var(--color-text)] shadow-2xl backdrop-blur-3xl"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <p className="text-lg leading-relaxed">
-          Sou um profissional em constante aprendizado, atualmente iniciando minha trajetória como Arquiteto de Soluções. Tenho experiência em desenvolvimento backend, infraestrutura em nuvem (AWS) e integração de sistemas, e venho direcionando minha carreira para projetar soluções escaláveis, seguras e sustentáveis.
-        </p>
-        <div className="flex flex-wrap items-center gap-2 text-sm uppercase tracking-[0.3em] text-[#93a1a1]/80">
-          {mantra.map((word, index) => {
-            const accent = solarizedAccents[index % solarizedAccents.length];
+        <p className="text-lg leading-relaxed">{about.body}</p>
+        <div className="flex flex-wrap items-center gap-2 text-sm uppercase tracking-[0.3em] text-[color:rgb(var(--color-muted-rgb))/0.8]">
+          {about.mantra.map((word, index) => {
+            const accent = accents[index % accents.length];
             return (
               <div key={word} className="flex items-center gap-2">
                 <span
@@ -33,7 +32,7 @@ export default function About() {
                 >
                   {word}
                 </span>
-                {index < mantra.length - 1 && <span className="opacity-70">→</span>}
+                {index < about.mantra.length - 1 && <span className="opacity-70">→</span>}
               </div>
             );
           })}

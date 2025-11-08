@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/app/components/ui/button";
-import { solarizedAccents } from "@/lib/palette";
+import { useAccentPalette } from "@/app/hooks/useAccentPalette";
+import { useCopy } from "@/app/hooks/useCopy";
 
 interface Project {
   title: string;
@@ -14,52 +15,40 @@ interface Project {
   stack: string[];
 }
 
-const projects: Project[] = [
-  {
-    title: "CoffeeHub",
-    summary:
-      "App mobile e API completa para rastreabilidade e gestão para cafeicultura.",
-    description:
-      "CoffeeHub nasceu para conectar o produtor ao consumidor com transparência. Combinei React Native 0.80 + React 19 no front e Django 5 + DRF no backend, com PostgreSQL e Docker para provisionar ambientes reproduzíveis. O resultado é um ecossistema que acompanha todo processo de cultivo dos cafés.",
-    githubUrl: undefined,
-    route: "Rota dedicada em breve",
-    stack: ["React Native", "React 19", "Django 5", "DRF", "PostgreSQL", "Docker"],
-  },
-];
-
 export default function Projects() {
+  const accents = useAccentPalette();
+  const { projects: projectsCopy } = useCopy();
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const projectItems = projectsCopy.items as Project[];
 
   return (
     <section id="projetos" className="mx-auto mt-24 w-full max-w-6xl px-4 sm:px-10 lg:px-16">
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-sm uppercase tracking-[0.4em] text-[#93a1a1]">Projetos</p>
-          <h2 className="mt-2 text-3xl font-semibold text-[#eee8d5] sm:text-4xl">Produtos que contam histórias</h2>
+          <p className="text-sm uppercase tracking-[0.4em] text-[var(--color-muted)]">{projectsCopy.eyebrow}</p>
+          <h2 className="mt-2 text-3xl font-semibold text-[var(--color-heading)] sm:text-4xl">{projectsCopy.title}</h2>
         </div>
-        <p className="max-w-md text-sm text-[#93a1a1]">
-          Cada projeto nasce com foco em propósito, telemetria e feedback contínuo. CoffeeHub é o primeiro de uma série em construção.
-        </p>
+        <p className="max-w-md text-sm text-[var(--color-muted)]">{projectsCopy.intro}</p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-        {projects.map((project, index) => (
+        {projectItems.map((project, index) => (
           <motion.article
             key={project.title}
-            className="flex h-full flex-col rounded-[30px] border border-white/5 bg-[#073642]/40 p-6 text-[#839496] shadow-lg backdrop-blur-3xl"
+            className="flex h-full flex-col rounded-[30px] border border-[color:var(--color-border-soft)] bg-[color:rgb(var(--color-surface-rgb))/0.4] p-6 text-[var(--color-text)] shadow-lg backdrop-blur-3xl"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
           >
             <div className="flex flex-col gap-3">
-              <h3 className="text-2xl font-semibold text-[#eee8d5]">{project.title}</h3>
-              <p className="text-sm text-[#93a1a1]">{project.summary}</p>
+              <h3 className="text-2xl font-semibold text-[var(--color-heading)]">{project.title}</h3>
+              <p className="text-sm text-[var(--color-muted)]">{project.summary}</p>
             </div>
 
             <div className="mt-4 flex flex-wrap gap-2">
               {project.stack.map((tech, techIndex) => {
-                const accent = solarizedAccents[(index + techIndex) % solarizedAccents.length];
+                const accent = accents[(index + techIndex) % accents.length];
                 return (
                   <span
                     key={tech}
@@ -85,14 +74,14 @@ export default function Projects() {
               >
                 {project.githubUrl ? (
                   <a href={project.githubUrl} target="_blank" rel="noreferrer">
-                    Repositório GitHub
+                    {projectsCopy.githubButton}
                   </a>
                 ) : (
-                  <>Repositório GitHub</>
+                  <>{projectsCopy.githubButton}</>
                 )}
               </Button>
               <Button variant="secondary" onClick={() => setActiveProject(project)}>
-                Ver Mais
+                {projectsCopy.viewButton}
               </Button>
             </div>
           </motion.article>
@@ -102,14 +91,15 @@ export default function Projects() {
       <AnimatePresence>
         {activeProject && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4"
+            className="fixed inset-0 z-50 flex items-center justify-center px-4"
+            style={{ backgroundColor: "var(--scrim-color)" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setActiveProject(null)}
           >
             <motion.div
-              className="w-full max-w-2xl rounded-[32px] border border-white/10 bg-[#002b36]/95 p-8 text-[#839496] shadow-2xl"
+              className="w-full max-w-2xl rounded-[32px] border border-[color:var(--color-border-strong)] bg-[color:rgb(var(--color-background-rgb))/0.95] p-8 text-[var(--color-text)] shadow-2xl"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
@@ -118,25 +108,25 @@ export default function Projects() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-sm uppercase tracking-[0.4em] text-[#93a1a1]">Projeto</p>
-                  <h3 className="mt-2 text-3xl font-semibold text-[#eee8d5]">
+                  <p className="text-sm uppercase tracking-[0.4em] text-[var(--color-muted)]">{projectsCopy.modalEyebrow}</p>
+                  <h3 className="mt-2 text-3xl font-semibold text-[var(--color-heading)]">
                     {activeProject.title}
                   </h3>
                 </div>
                 <button
                   type="button"
                   onClick={() => setActiveProject(null)}
-                  className="text-sm uppercase tracking-[0.3em] text-[#93a1a1] transition hover:text-[#eee8d5]"
+                  className="text-sm uppercase tracking-[0.3em] text-[var(--color-muted)] transition hover:text-[var(--color-heading)]"
                 >
-                  Fechar
+                  {projectsCopy.modalClose}
                 </button>
               </div>
-              <p className="mt-6 text-lg leading-relaxed text-[#b4c2c2]">
+              <p className="mt-6 text-lg leading-relaxed text-[var(--color-body-strong)]">
                 {activeProject.description}
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 {activeProject.stack.map((tech, techIndex) => {
-                  const accent = solarizedAccents[(techIndex + 2) % solarizedAccents.length];
+                  const accent = accents[(techIndex + 2) % accents.length];
                   return (
                     <span
                       key={`${activeProject.title}-${tech}`}
@@ -153,15 +143,15 @@ export default function Projects() {
                 })}
               </div>
               {activeProject.route && (
-                <p className="mt-6 text-sm text-[#93a1a1]">
+                <p className="mt-6 text-sm text-[var(--color-muted)]">
                   {activeProject.route.startsWith("http") ? (
                     <>
-                      Repositório: {" "}
+                      {projectsCopy.repositoryLabel}{" "}
                       <a
                         href={activeProject.route}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-[#2aa198] underline underline-offset-4 hover:text-[#2aa198]/80"
+                        className="text-[var(--link-color)] underline underline-offset-4 hover:text-[var(--link-hover)]"
                       >
                         {activeProject.route}
                       </a>
@@ -169,7 +159,7 @@ export default function Projects() {
                   ) : (
                     <>
                       {" "}
-                      <span className="text-[#2aa198]">{activeProject.route}</span>
+                      <span className="text-[var(--link-color)]">{activeProject.route}</span>
                     </>
                   )}
                 </p>
