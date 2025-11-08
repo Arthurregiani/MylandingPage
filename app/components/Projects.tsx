@@ -91,7 +91,7 @@ export default function Projects() {
       <AnimatePresence>
         {activeProject && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center px-4"
+            className="fixed inset-0 z-50 flex items-center justify-center px-4 backdrop-blur-lg"
             style={{ backgroundColor: "var(--scrim-color)" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -99,7 +99,7 @@ export default function Projects() {
             onClick={() => setActiveProject(null)}
           >
             <motion.div
-              className="w-full max-w-2xl rounded-[32px] border border-[color:var(--color-border-strong)] bg-[color:rgb(var(--color-background-rgb))/0.95] p-8 text-[var(--color-text)] shadow-2xl"
+              className="w-full max-w-2xl rounded-[32px] border border-[color:var(--color-border-strong)] bg-[color:var(--color-overlay-95)] p-8 text-[var(--color-text)] shadow-2xl"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
