@@ -1,4 +1,5 @@
-# Profile LandingPage — Next.js + Docker + Cloudflare Tunnel
+# Profile LandingPage — Next.js + Docker + Cloudflare Tunnel 
+# Acessem em: https://me.tutsdev.com.br
 
 Landing page pessoal construída em Next.js (App Router) com tema Solarized Dark/Light, animações com Framer Motion, smooth scroll (Lenis) e backend de contato via Nodemailer. O projeto foi desenhado para rodar localmente e em produção com Docker e Cloudflare Tunnel — sem expor portas públicas.
 
@@ -160,16 +161,6 @@ docker compose logs -f landing
 - Não versione `.env` e `.env.production`.
 - Use Gmail App Password (conta com 2FA) — não use a senha da conta.
 - Não é necessário abrir portas públicas; todo acesso é via Tunnel.
-
-## Troubleshooting
-- 535 Invalid login (Gmail):
-  - Gere e use uma App Password (16 caracteres). Reinicie a app: `docker compose restart landing`.
-- Túnel "Inactive":
-  - Verifique `CLOUDFLARE_TUNNEL_TOKEN` e os logs do serviço `tunnel`.
-- 502/404 no domínio:
-  - Confirme o Public Hostname `me.tutsdev.com.br` → `http://landing:3000`.
-- Porta 3000 ocupada no host:
-  - Não afeta o deploy — a app expõe 3000 apenas na rede do Docker (sem bind no host).
 
 ---
 
