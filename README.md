@@ -48,3 +48,5 @@ CONTACT_EMAIL_TO= # opcional, usa SMTP_USER por padrão
    ```
 4. Atualizações: `docker stop landing-page && docker rm landing-page && docker build ...` antes de rodar novamente.
 5. Para logs em produção: `docker logs -f landing-page`.
+
+Para acessar minha landingpage: https://me.tutsdev.com.br
