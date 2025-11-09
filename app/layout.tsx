@@ -21,11 +21,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Arthur José Regiani",
   description:
-    "Landing page pessoal.",
+    "Profile landing page.",
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
-    apple: "/favicon.svg",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -37,11 +37,14 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" data-theme="solarized-dark">
       <head>
-        {/* Link direto para favicon como fallback para garantir carregamento em todos os navegadores */}
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="shortcut icon" href="/favicon.svg" />
-        {/* Apple devices prefer PNG but SVG can be used as a compact fallback */}
-        <link rel="apple-touch-icon" href="/favicon.svg" />
+        {/* Favicons para compatibilidade ampla across browsers */}
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        {/* Keep SVG as high-quality mask-icon for browsers that support it */}
+        <link rel="mask-icon" href="/favicon.svg" color="#268bd2" />
+        <meta name="theme-color" content="#002b36" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-[var(--color-background)] text-[var(--color-text)] antialiased`}

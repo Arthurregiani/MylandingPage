@@ -33,12 +33,6 @@ CONTACT_EMAIL_TO= # opcional, usa SMTP_USER por padrão
 
 > O endpoint `/api/contact` falhará em produção se qualquer uma das credenciais SMTP estiver ausente.
 
-## Deploy na Vercel
-1. Faça login em [vercel.com](https://vercel.com/).
-2. Importar o repositório e selecionar o framework **Next.js** (config padrão).
-3. Informar as variáveis de ambiente acima em *Project Settings › Environment Variables*.
-4. Deploy. A Vercel detecta automaticamente `npm run build` e `npm start`.
-
 ## Deploy via Docker
 1. Gere um arquivo de variáveis para produção (`cp .env.example .env.production`) e ajuste os valores SMTP.
 2. Monte a imagem: `docker build -t my-landing-page .`
@@ -50,3 +44,31 @@ CONTACT_EMAIL_TO= # opcional, usa SMTP_USER por padrão
 5. Para logs em produção: `docker logs -f landing-page`.
 
 Para acessar minha landingpage: https://me.tutsdev.com.br
+
+## Favicons
+
+O projeto fornece um SVG (`public/favicon.svg`) como fonte da marca. Para garantir compatibilidade entre navegadores (Chrome, Firefox, Safari, Edge e iOS) geramos também PNGs e um `favicon.ico` multi-res.
+
+Como regenerar os ícones a partir do SVG:
+
+1. Instale dependências dev (caso ainda não tenha):
+
+```bash
+npm install --save-dev sharp to-ico
+```
+
+2. Rode o script de geração (já adicionado ao `package.json`):
+
+```bash
+npm run generate-favicons
+```
+
+Isso cria em `public/`:
+- `favicon-16.png`, `favicon-32.png`, `favicon-48.png`, `favicon-180.png`
+- `apple-touch-icon.png`
+- `favicon.ico`
+
+Notas:
+- Limpe o cache do navegador ou use uma aba anônima para ver alterações imediatamente.
+- O `favicon.svg` é mantido como `mask-icon` no layout para navegadores que suportam SVGs vetoriais.
+- Se for usar em CI/CD (ex.: Docker), instale as dependências nativas necessárias para `sharp` no ambiente de build.

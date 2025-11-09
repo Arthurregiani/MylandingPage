@@ -12,6 +12,9 @@ FROM base AS builder
 ENV NODE_ENV=production
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+# Generate favicons during the build so production images include PNG/ICO variants
+# (requires devDependencies like sharp/to-ico to be installed in the deps stage)
+RUN npm run generate-favicons || true
 RUN npm run build
 
 FROM node:20-alpine AS runner
