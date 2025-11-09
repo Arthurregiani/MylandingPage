@@ -23,9 +23,9 @@ export const metadata: Metadata = {
   description:
     "Landing page pessoal.",
   icons: {
-    icon: "/solarized-icon.svg",
-    shortcut: "/solarized-icon.svg",
-    apple: "/solarized-icon.svg",
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
   },
 };
 
@@ -36,6 +36,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" data-theme="solarized-dark">
+      <head>
+        {/* Link direto para favicon como fallback para garantir carregamento em todos os navegadores */}
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" href="/favicon.svg" />
+        {/* Apple devices prefer PNG but SVG can be used as a compact fallback */}
+        <link rel="apple-touch-icon" href="/favicon.svg" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-[var(--color-background)] text-[var(--color-text)] antialiased`}
       >
